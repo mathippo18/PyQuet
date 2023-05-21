@@ -2,7 +2,7 @@ from flask import  Flask, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from sqlalchemy import desc
-
+import pickle
 
 
 app = Flask(__name__)
@@ -29,12 +29,23 @@ class Note(db.Model):
 
     
 
-@app.route('/', methods=['POST'])
+@app.route('/')
+def hello_world():
+    return render_template("login.html")
+database={'nachi':'123','james':'aac','karthik':'asdsf', 'test':'test'}
+
+@app.route('/form_login',methods=['POST','GET'])
 def login():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    
-    return redirect (url_for('home'))
+    name1=request.form['username']
+    pwd=request.form['password']
+    if name1 not in database:
+	    return render_template('login.html',info='Invalid User')
+    else:
+        if database[name1]!=pwd:
+            return render_template('login.html',info='Invalid Password')
+        else:
+	         return render_template('list.html',name=name1)
+
 
 @app.route('/list')
 def home():
