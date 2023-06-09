@@ -32,7 +32,7 @@ class Note(db.Model):
 @app.route('/')
 def hello_world():
     return render_template("login.html")
-database={'nachi':'123','james':'aac','karthik':'asdsf', 'test':'test'}
+database={'Pierre':'P-TR','Math':'Tu crois vraiment que je vais mettre mon MDP','Alexandre':'SHEESH', 'Théo':'Viens geeker sur Ultrakill'}
 
 @app.route('/form_login',methods=['POST','GET'])
 def login():
